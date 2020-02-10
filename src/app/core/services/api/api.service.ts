@@ -56,8 +56,9 @@ export class ApiService {
     return this.http.put(`${API_BASE_URL}/${endpoint}`, form);
   }
 
-  delete(endpoint: string, id: string | number, options?: CustomReqOptions): Observable<string | Object> {
-    return this.http.delete(`${API_BASE_URL}/${endpoint}/${id}`, options);
+  delete(endpoint: Array<string>, options?: CustomReqOptions): Observable<string | Object> {
+    const uri = endpoint.join('/');
+    return this.http.delete(`${API_BASE_URL}/${uri}`, options);
   }
 
   private _form(data: any = {}): any {

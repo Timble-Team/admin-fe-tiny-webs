@@ -1,17 +1,15 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { AuthGuard , LoginGuard} from './core/services/auth/auth-guard';
+import { AdminResolver } from './admin/admin.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    redirectTo: 'admin',
-    pathMatch: 'full'
-  },
-  {
-    path: 'admin',
-    canActivate: [AuthGuard],
+    resolve: {
+      data: AdminResolver
+    },
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {

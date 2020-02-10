@@ -29,6 +29,7 @@ export class PageLoginComponent implements OnInit {
   getUserInfo() {
     this.api.get(['users', 'me']).subscribe(data => {
       this.common.setUser(data);
+      this.router.navigateByUrl('/');
     });
   }
 
@@ -41,7 +42,6 @@ export class PageLoginComponent implements OnInit {
     };
     this.api.post(['auth/login'], body).subscribe((data: any) => {
       localStorage.setItem('ACCESS_TOKEN', data.access_token);
-      this.router.navigateByUrl('/');
       this.getUserInfo();
     },
     (err: any) => {

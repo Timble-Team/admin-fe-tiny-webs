@@ -1,6 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonService } from './core/services/common.service';
-import { ApiService } from './core/services/api/api.service';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,26 +6,13 @@ import { ApiService } from './core/services/api/api.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
 
-  constructor(
-    private common: CommonService,
-    private cd: ChangeDetectorRef,
-    private api: ApiService
-  ) {}
+  constructor() {}
 
-  checkPathDifferWithAuth() {
-    return !/^(\/auth)\/.*/.test(window.location.pathname);
+  ngAfterViewInit() {
+    const loadingSplash = document.getElementById('splashLoading');
+    loadingSplash.style.display = 'none';
   }
 
-  ngOnInit() {
-    this.api.get(['users', 'me']).subscribe(data => {
-      this.common.setUser(data);
-    },
-    e => {
-      // if (e.status === 401 && this.checkPathDifferWithAuth()) {
-      //   localStorage.setItem('CONTINUOUS_URL', window.location.pathname);
-      // }
-    });
-  }
 }

@@ -1,0 +1,35 @@
+<p-card>
+  <p-header>
+    <div class="ui-card-body mt-2 mb-2">
+      <button class="float-right mb-2" pButton type="button" label="Tạo đơn vị" [routerLink]="['new']"></button>
+    </div>
+  </p-header>
+  <p-table [value]="agencies">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-agency let-rowIndex="rowIndex">
+      <tr>
+        <td *ngFor="let col of cols; let i = index">
+          {{agency[col.field]}}
+          <span class="float-right" *ngIf="i === (cols.length - 1)" (click)="handleAction(rowIndex, $event)">
+            <i class="pi pi-ellipsis-v"></i>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+<p-tieredMenu #menu [model]="items" appendTo="body" [popup]="true"></p-tieredMenu>
+<p-dialog header="Thêm User cho đơn vị" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false" [dismissableMask]="true">
+    <p><b>Đơn vị: </b>{{currentItem?.name}}</p>
+    <reactive-form
+      [configForm]="configForm.form"
+      (submitEmitter)="onSubmit($event)">
+    </reactive-form>
+</p-dialog>

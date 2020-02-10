@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class CommonService {
@@ -11,8 +12,9 @@ export class CommonService {
 
 
   constructor(
+    private route: ActivatedRoute
   ) {
-    this.breadcrumb$ = new BehaviorSubject<any>(null);
+    this.breadcrumb$ = new BehaviorSubject<any>([]);
     this.user$ = new BehaviorSubject<any>(null);
     this.agencies$ = new BehaviorSubject<any>(null);
   }
@@ -54,5 +56,19 @@ export class CommonService {
 
   getUser() {
     return this.user$.value;
+  }
+
+  setBreadCrumb(value) {
+    console.log(value);
+    const tempCrumb = this.breadcrumb$.value;
+    if (value.level > tempCrumb.length) {
+      tempCrumb.push(value);
+    } else if (value.level === tempCrumb.length) {
+      tempCrumb[tempCrumb.length - 1] = value;
+    } else {
+      tempCrumb[value.level - 1] = value;
+      tempCrumb.splice(value.level);
+    }
+    this.breadcrumb$.next(tempCrumb);
   }
 }

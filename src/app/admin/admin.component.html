@@ -1,0 +1,23 @@
+<!-- Page Loader -->
+<div class="body {{themeClass}} {{smallScreenMenu}} {{darkClass}}">
+	<!-- <app-page-loader *ngIf="!isStopLoading"></app-page-loader> -->
+	<p-toast [style]="{marginTop: '80px'}"></p-toast>
+	<p-confirmDialog header="Confirmation" appendTo="body" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+	<div id="wrapper" *ngIf="isStopLoading">
+		<app-header [showNotifMenu]="showNotifMenu" [showToggleMenu]="showToggleMenu" [darkClass]="darkClass"
+			(toggleSettingDropMenuEvent)="toggleSettingDropMenu()"
+			(toggleNotificationDropMenuEvent)="toggleNotificationDropMenu()"></app-header>
+		<app-sidebar *ngIf="dataSideBar"
+								 [sidebarVisible]="sidebarService.sidebarVisible"
+								 [navTab]="navTab"
+								 [sidebarData]="dataSideBar"
+								 [currentActiveMenu]="currentActiveMenu"
+								 [currentActiveSubMenu]="currentActiveSubMenu"
+								 (activeInactiveMenuEvent)="activeInactiveMenu($event)">
+		</app-sidebar>
+		<div id="main-content" [ngClass]="{'layout-fullwidth':!sidebarService.sidebarVisible}">
+			<app-breadcrumb></app-breadcrumb>
+			<router-outlet (activate)="getActiveRoutes()"></router-outlet>
+		</div>
+	</div>
+</div>

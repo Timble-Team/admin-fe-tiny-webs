@@ -4,13 +4,13 @@ export function renderSidebar(adminType) {
 
 export const sidebarSuper = [
   {
-    path: 'agencies',
+    path: '/agencies',
     title: 'Đơn vị',
     icon: 'icon-home',
     children: [
       {
         path: '',
-        title: 'Quản lý đơn vị',
+        title: 'Quản lý đơn vị'
       }
     ]
   },
@@ -48,17 +48,32 @@ export const sidebarSuper = [
 
 export const sidebar = [
   {
-    path: 'content',
+    path: '/agencies/me',
+    title: 'Đơn vị',
+    icon: 'icon-home',
+    children: [
+      {
+        path: '',
+        title: 'Đơn vị của tôi'
+      }
+    ]
+  },
+  {
+    path: '',
     title: 'Nội dung',
     icon: 'icon-home',
     children: [
       {
-        path: 'articles',
+        path: '/articles',
         title: 'Bài viết',
       },
       {
-        path: 'files',
-        title: 'Quản lý File',
+        path: '/albums',
+        title: 'Album',
+      },
+      {
+        path: '/videos',
+        title: 'Video',
       }
     ]
   },

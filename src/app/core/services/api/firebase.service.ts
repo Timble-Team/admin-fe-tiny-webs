@@ -1,16 +1,24 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
-
-export { END_POINT } from '../../../config/api.config';
 import { environment } from '../../../../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 export const API_BASE_URL = ``;
 
-@Injectable({providedIn: 'root'})
-export class FireBaseService {
+@Injectable()
+export class FirebaseService {
+  publicCond = [
+    {
+      key: 'public',
+      compared: '==',
+      value: true
+    },
+    {
+      key: 'deletedAt',
+      compared: '==',
+      value: null
+    }
+  ];
 
   constructor(
     private http: HttpClient,
@@ -56,7 +64,7 @@ export class FireBaseService {
   }
 
   getRecord(collection, id) {
-    return this.firestore.collection(collection).doc(id).get();
+    return this.firestore.collection(collection).doc(id).get().toPromise();
   }
 
   /*
@@ -64,11 +72,25 @@ export class FireBaseService {
     order: {key, by}
   */
   listRecords(collection, condition = null, order = null) {
-    let request = condition ?
-      this.firestore.collection(collection).ref.where(condition.key, condition.compared, condition.value) :
-      this.firestore.collection(collection).ref;
+    let request;
+    if (condition) {
+      if (condition.length) {
+        request = this.firestore.collection(collection).ref;
+        condition.forEach(x => {
+          request = request.where(x.key, x.compared, x.value);
+        });
+      } else {
+        request = this.firestore.collection(collection).ref.where(condition.key, condition.compared, condition.value);
+      }
+    } else {
+      request = this.firestore.collection(collection).ref;
+    }
     request = order ? request.orderBy(order.key, order.by) : request;
     return request.get();
+  }
+
+  listPublicRecords(collection, condition = this.publicCond, order = null) {
+    return this.listRecords(collection, condition, order);
   }
 
   editRecord(collection, id, body) {
@@ -84,5 +106,6 @@ export class FireBaseService {
       .doc(id)
       .delete();
   }
+
 }
 

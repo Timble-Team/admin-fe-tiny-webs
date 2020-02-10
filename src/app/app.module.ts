@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -13,10 +13,11 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/module/core.module';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { DialogService } from 'primeng/api';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from 'environments/environment';
+import { DialogService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { AppConfigService } from './core/services/api/config.service';
+import { FirebaseService } from './core/services/api/firebase.service';
+import { AdminResolver } from './admin/admin.resolver';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,14 @@ import { environment } from 'environments/environment';
     LeafletModule.forRoot(),
     DynamicDialogModule,
     NgxGalleryModule,
-    HttpClientModule,
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFirestoreModule
+    HttpClientModule
   ],
   providers: [
     DialogService,
+    ConfirmationService,
+    MessageService,
+    FirebaseService,
+    AdminResolver
   ],
   bootstrap: [AppComponent]
 })
