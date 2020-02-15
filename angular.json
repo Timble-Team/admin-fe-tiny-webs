@@ -59,7 +59,6 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "index": "src/indexdev.html",
               "buildOptimizer": true,
               "fileReplacements": [
                 {
