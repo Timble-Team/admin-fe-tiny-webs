@@ -11,10 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from 'app/shared/components/shared.module';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
 import { FirebaseService } from 'app/core/services/api/firebase.service';
 import { ApiService } from 'app/core/services/api/api.service';
 import { AppConfigService } from 'app/core/services/api/config.service';
+import { SidebarModule } from 'primeng/sidebar';
+
 
 const routes: Routes = [
   {
@@ -34,10 +37,6 @@ const routes: Routes = [
 	}
 ];
 
-export function appInit(appConfigService: AppConfigService) {
-	return appConfigService.load();
-}
-
 @NgModule({
 	imports: [
 		CommonModule,
@@ -49,8 +48,7 @@ export function appInit(appConfigService: AppConfigService) {
 		ChartsModule,
 		PagesModule,
 		SharedModule,
-		AngularFireModule,
-		AngularFirestoreModule,
+		SidebarModule,
 		RouterModule.forChild(routes)
 	],
 	declarations: [
@@ -58,12 +56,7 @@ export function appInit(appConfigService: AppConfigService) {
 	],
 	providers: [
 		FirebaseService,
-		AppConfigService,
-		{
-      provide: FirebaseOptionsToken,
-      deps: [AppConfigService],
-      useFactory: appInit
-    }
+		AppConfigService
 	]
 })
 export class AdminModule { }

@@ -1,43 +1,27 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ThemeService } from '../../services/theme.service';
-import { AuthService } from 'app/core/services/auth/auth.service';
+import { CommonService } from 'app/core/services/common.service';
+import { AdminEnum } from 'app/shared/enum/admin.enum';
 
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',
-	providers: [NgbDropdownConfig]
 })
 export class HeaderComponent implements OnInit {
-	// Properties
-	@Input() showNotifMenu = false;
-  @Input() showToggleMenu = false;
-  @Input() darkClass = '';
-	@Output() toggleSettingDropMenuEvent = new EventEmitter();
-	@Output() toggleNotificationDropMenuEvent = new EventEmitter();
+	toggle: Boolean = false;
+	user: any;
 
-	constructor(private config: NgbDropdownConfig,
-							private themeService: ThemeService,
-							private authSevice: AuthService) {
-		config.placement = 'bottom-right';
+	constructor(
+		private common: CommonService
+	) {
+
 	}
 
 	ngOnInit() {
-	}
-
-	toggleSettingDropMenu() {
-		this.toggleSettingDropMenuEvent.emit();
-	}
-
-	toggleNotificationDropMenu() {
-		this.toggleNotificationDropMenuEvent.emit();
-	}
-
-	toggleSideMenu() {
-		this.themeService.showHideMenu();
-	}
-
-	logout() {
-		this.authSevice.logout();
+		this.common.user$.subscribe(user => {
+      if (user) {
+				this.user = user;
+				this.user.role = AdminEnum[this.user.adminType];
+      }
+    });
 	}
 }

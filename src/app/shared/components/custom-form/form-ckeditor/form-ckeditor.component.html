@@ -1,0 +1,11 @@
+<div 
+  class="dynamic-field"
+  [ngClass]="submitted && group.controls[config.key].errors ? errorClassContainer : activeClassContainer" 
+  [formGroup]="group">
+  <app-ckeditor
+    [options]="config.inputType.options"
+    [ngClass]="submitted && group.controls[config.key].errors ? errorClass : activeClass" 
+    [formControlName]="config.key">
+  </app-ckeditor>
+  <!-- <span class="desc">{{config.inputType.description}}</span> -->
+</div>

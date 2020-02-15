@@ -1,5 +1,5 @@
 export enum AdminEnum {
-  'ADMIN' = 0,
-  'SUBADMIN' = 1,
-  'PHOTOGRAPHER' = 2
+  'SUPERADMIN' = 0,
+  'AGENCY OWNER' = 1,
+  'AGENCY ASSISTANT' = 2
 }

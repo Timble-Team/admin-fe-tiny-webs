@@ -1,0 +1,48 @@
+// .modal {
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   z-index: 9999;
+//   align-items: center;
+//   justify-content: center;
+//   background: $backgroundOpacity;
+//   opacity: 0;
+//   visibility: hidden;
+//   transition: all .5s;
+//   &.open {
+//     display: flex;
+//     opacity: 1;
+//     visibility: visible;
+//     .modal-dialog {
+//       transform: translateY(0);
+//     }
+//   }
+//   .modal-dialog {
+//     @include pxRem(border-radius, 10);
+//     @include pxRem(width, 300);
+//     max-width: calc(100% - 40px);
+//     position: absolute;
+//     background: map-get($color, white);
+//     transform: translateY(#{f-pxRem(35)});
+//     transition: all .3s ease-out;
+//     &.top {
+//       align-self: flex-start;
+//     }
+//     &.bottom {
+//       align-self: flex-end;
+//     }
+//   }
+//   .modal-footer {
+//     @include pxRem(padding, 8);
+//     text-align: center;
+//     button {
+//       @include pxRem(min-width, 200);
+//       @include pxRem(margin, 4 0);
+//     }
+//     .btn-md {
+//       @include pxRem(min-width, 120);
+//     }
+//   }
+// }

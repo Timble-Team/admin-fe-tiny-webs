@@ -1,0 +1,11 @@
+<div 
+  class="dynamic-field"
+  [ngClass]="submitted && group.controls[config.key].errors ? errorClassContainer : activeClassContainer" 
+  [formGroup]="group">
+  <app-media-picker
+    [ngClass]="submitted && group.controls[config.key].errors ? errorClass : activeClass" 
+    [options]="config.inputType.options"
+    [formControlName]="config.key">
+  </app-media-picker>
+  <span class="desc">{{config.inputType.description}}</span>
+</div>

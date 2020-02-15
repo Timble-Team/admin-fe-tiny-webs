@@ -6,12 +6,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 
 @NgModule({
 	imports: [
 		CommonModule,
+		TieredMenuModule,
 		NgbModule,
+		PanelMenuModule,
 		BreadcrumbModule,
 		RouterModule,
 	],

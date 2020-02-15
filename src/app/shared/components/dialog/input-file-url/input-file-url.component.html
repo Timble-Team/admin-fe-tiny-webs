@@ -1,0 +1,36 @@
+<p-card header="Thêm Link File">
+  <small>Chú ý: link phải trỏ đến chính xác 1 file. Liên hệ bộ phận kĩ thuật nếu bạn chưa nắm rõ điều này.</small>
+  <div class="pt-5 layout-dashboard">
+    <span class="ui-float-label">
+      <input id="float-input" type="text" size="30" [(ngModel)]="link" pInputText>
+      <label for="float-input">Thêm Link tại đây</label>
+      <button class="ui-button-warning" pButton type="button" label="Thêm" (click)="addLink()"
+        icon="pi pi-pencil" [disabled]="!link"></button>
+    </span>
+    <div class="download-files" *ngIf="links.length > 0">
+      <h4>Danh sách Link</h4>
+      <ul>
+        <li *ngFor="let directLink of links; let i = index">
+          <div class="p-grid list-item">
+            <div class="file-name">
+              <h2 class="name pr-5">{{directLink}}</h2>
+              <div class="new" (click)="removeLink(i)">
+                <div class="new-tag delete-tag"> Delete </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</p-card>
+<p-card header="Thêm File">
+  <p-fileUpload name="demo[]" accept="image/*" maxFileSize="10000000" customUpload="true" [showCancelButton]="false"
+    (uploadHandler)="myUploader($event)">
+    <!-- <ng-template pTemplate="toolbar">
+      <button pButton type="button" label="Upload" icon="pi pi-upload" (click)="onBeforeUpload($event)"></button>
+  </ng-template> 
+   [showUploadButton]="false"
+    [showCancelButton]="false"-->
+  </p-fileUpload>
+</p-card>

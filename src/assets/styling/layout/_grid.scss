@@ -1,0 +1,76 @@
+// Mixins for build grid
+$grid-columns: 12;
+$grid-gutter: 25;
+@mixin build-grid($size) {
+  @for $i from 1 through $grid-columns {
+    $per: percentage($i / $grid-columns);
+    @if $size != '' {
+      .f-col-#{$size}-#{$i} {
+        @include pxRem(padding-left, 15);
+        @include pxRem(padding-right, 15);
+        flex-basis: percentage($i / $grid-columns);
+      }
+    } @else {
+      .f-col-#{$i} {
+        flex-basis: calc(#{$per} - #{$grid-gutter});
+      }
+    }
+  }
+}
+// End mixins for build grid
+
+.f-row {
+  @include pxRem(margin-left, -15);
+  @include pxRem(margin-right, -15);
+  display: flex;
+  flex-flow: row wrap;
+  &.f-row-vm {
+    align-items: center;
+  }
+  > [class*="col-"] {
+    position: relative;
+    box-sizing: border-box;
+  }
+}
+
+// Remove gutters (margin, padding) of row & col
+.f-row-no-gutters {
+  $grid-gutter: 0px;
+}
+
+/* Grid for all screen
+ * Ex: col-1, col-2 */
+@include build-grid('');
+
+/* Grid for screen min-width: $small
+ * Ex: col-small-1, col-small-2 */
+@include respond-above(small) {
+  @include build-grid(small);
+}
+
+/* Grid for screen min-width: $medium
+ * Ex: col-medium-1, col-medium-2 */
+@include respond-above(medium) {
+  @include build-grid(medium);
+}
+
+/* Grid for screen min-width: $large
+ * Ex: col-large-1, col-large-2 */
+@include respond-above(large) {
+  @include build-grid(large);
+}
+
+/* Grid for screen min-width: $largest
+ * Ex: col-largest-1, col-largest-2 */
+@include respond-above(largest) {
+  @include build-grid(largest);
+}
+
+.p-grid {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -.5em;
+  margin-left: -.5em;
+  margin-top: -.5em;
+}

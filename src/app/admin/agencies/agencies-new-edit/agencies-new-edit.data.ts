@@ -12,110 +12,129 @@ export class AgencyForm {
     },
     config: [
       {
-        label: 'Tên đơn vị',
+        label: {
+          text: 'Tên đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'name',
         inputType: {
           name: 'input',
           type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
-          Validators.required
+          Validators.required,
+          Validators.minLength(5)
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc',
+          minlength: 'Độ dài tối thiểu là 5 kí tự'
         },
       },
       {
-        label: 'Mô tả đơn vị',
+        label: {
+          text: 'Mô tả đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'desc',
         inputType: {
-          name: 'input',
+          name: 'textarea',
           type: 'text',
+          extraClass: 'ui-inputtext ui-corner-all ui-inputtextarea-resizable ui-state-default ui-widget'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       },
       {
-        label: 'Domain đơn vị',
+        label: {
+          text: 'Domain đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'domain',
         inputType: {
           name: 'input',
           type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       },
       {
-        label: 'SDT đơn vị',
+        label: {
+          text: 'SDT đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'phone',
         inputType: {
           name: 'input',
           type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       },
       {
-        label: 'Địa chỉ đơn vị',
+        label: {
+          text: 'Địa chỉ đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'address',
         inputType: {
           name: 'input',
           type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       },
       {
-        label: 'Firebase đơn vị',
+        label: {
+          text: 'Firebase đơn vị',
+          extraClass: 'reactive-label'
+        },
         key: 'firebaseConfig',
         inputType: {
           name: 'input',
-          type: 'text'
+          type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       },
       {
-        label: 'Public',
+        label: {
+          text: 'Public',
+          extraClass: 'reactive-label'
+        },
         key: 'public',
         inputType: {
-          name: 'radio',
-          data: [
-            {
-              text: 'OFF',
-              value: false
-            },
-            {
-              text: 'ON',
-              value: true
-            }
-          ]
+          name: 'switcher'
         },
         validation: [
           Validators.required
         ],
         errors: {
-          required: 'validator.required'
+          required: 'Trường này là bắt buộc'
         },
       }
     ]

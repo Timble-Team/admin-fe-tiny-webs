@@ -1,0 +1,193 @@
+.text-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+.text-centered {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.hidden {
+  display: none !important;
+}
+.pull-right {
+  float: right;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.flex-vertical-center {
+  align-items: center;
+}
+.flex-horizontal-center {
+  justify-content: center;
+}
+.text-center {
+  text-align: center;
+}
+.disable-scroll {
+  overflow-y: hidden;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
+.img-circle {
+  border-radius: 50%;
+}
+.img-covered {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.border-around {
+  @include pxRem(border-radius, 6);
+}
+.border-color-red {
+  border-color: map-get($color, red);
+}
+.small-text {
+  @include pxRem(font-size, 10);
+  font-weight: 400;
+}
+.img-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.primary-text {
+  color: map-get($color, primary);
+}
+.default-text {
+  color: map-get($color, text);
+}
+.text-muted {
+  // color: rgba(map-get($color, text), 0.4);
+}
+.text-link {
+  color: map-get($color, blue)
+}
+.text-danger {
+  color: red;
+}
+.yellow-bg {
+  background: map-get($color, yellow-a)
+}
+.pre-line {
+  white-space: pre-line;
+}
+$rootSize : 5;
+$sizeList : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 , 14, 15;
+
+@each $size in $sizeList {
+  $value: $rootSize * $size;
+  .pd-#{$size} {
+    @include pxRem(padding, $value);
+  }
+  .pl-#{$size} {
+    @include pxRem(padding-left, $value);
+  }
+  .pr-#{$size} {
+    @include pxRem(padding-right, $value);
+  }
+  .pt-#{$size} {
+    @include pxRem(padding-top, $value);
+  }
+  .pb-#{$size} {
+    @include pxRem(padding-bottom, $value);
+  }
+  .mg-#{$size} {
+    @include pxRem(margin, $value);
+  }
+  .mt-#{$size} {
+    @include pxRem(margin-top, $value);
+  }
+  .ml-#{$size} {
+    @include pxRem(margin-left, $value);
+  }
+  .mb-#{$size} {
+    @include pxRem(margin-bottom, $value);
+  }
+  .mr-#{$size} {
+    @include pxRem(margin-right, $value);
+  }
+}
+@include respond-above("medium") {
+  .desktop-only {
+    display: inherit;
+  }
+  .mobile-only {
+    display: none !important;
+  }
+}
+@include respond-below("medium") {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: inherit;
+    &.hide-user {
+      ~ .account-link {
+        display: none;
+      }
+    }
+  }
+}
+@include respond-below("wide") {
+  .container,
+  .container-fluid  {
+    max-width: 100%;
+  }
+}
+
+.bg-blue {
+  background-color: map-get($color, text) !important;
+}
+.radius-circle {
+  border-radius: 50%;
+}
+.limit-txt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+// Oveflow
+.over-hidden {
+  overflow: hidden;
+}
+
+.disabled {
+  pointer-events: none;
+}
+// Ratio
+.ratio-3-2 {
+  padding-bottom: 66.6666667%;
+}
+.ratio-1-1 {
+  padding-bottom: 100%;
+}
+.ratio-cover {
+  padding-bottom: 46.6666666667%;
+}
+.ratio-3-2,
+.ratio-1-1,
+.ratio-cover {
+  position: relative;
+  .img-covered {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+.pre-line {
+  white-space: pre-line;
+}
+
+.full-width {
+  width: 100% !important;
+}

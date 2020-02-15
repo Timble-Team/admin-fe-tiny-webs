@@ -1,0 +1,15 @@
+body .ui-sidebar {
+  @include pxRem(padding, 0 10);
+  background-color: map-get($color, grey-b);
+  transform: none;
+  opacity: 1 !important;
+  z-index: 1000;
+  .sidebar-header {
+    text-align: center;
+    .logo {
+      width: 60%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}

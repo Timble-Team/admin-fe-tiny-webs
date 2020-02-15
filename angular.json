@@ -21,20 +21,15 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/reset-css/sass/_reset.scss",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              // "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.css",
-              "src/assets/scss/main.scss"
+              "src/assets/styling/theme_light.scss",
+              "src/assets/styling/layout_light.scss",
+              "src/assets/styling/styles.scss"
             ],
             "scripts": [
-              "node_modules/jspdf/dist/jspdf.min.js",
-              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js",
-              "src/assets/fonts/LovestorySERIF-normal.js"
             ]
           },
           "configurations": {
@@ -64,6 +59,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
+              "index": "src/indexdev.html",
               "buildOptimizer": true,
               "fileReplacements": [
                 {
@@ -78,7 +74,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "lucid:build",
-            "port": 4333
+            "port": 4334
           },
           "configurations": {
             "production": {
@@ -102,8 +98,7 @@
             "scripts": [],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "src/styles.css"
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "assets": [
               "src/assets",

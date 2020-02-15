@@ -1,0 +1,15 @@
+<ckeditor 
+  #myckeditor
+  name="ckeditor"
+  (change)="emitValue($event)"
+  [config]="ckeConfig">
+  <ckbutton
+    [name]="'imageExplorer'"
+    (click)="triggerModal()"
+    [command]="'openImageExplorer'"
+    label="Ảnh"
+    icon="https://cdn.onlinewebfonts.com/svg/img_148071.png"
+    [toolbar]="insert">
+  </ckbutton>
+</ckeditor>
+<button type="button" id="js-btn-tmp-show-list" [hidden]="true" (click)="uploadImg()">submit</button>

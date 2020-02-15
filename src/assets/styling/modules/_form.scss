@@ -1,0 +1,20 @@
+.dynamic-form {
+  .reactive-label {
+    @include pxRem(padding-top, 10);
+    @include pxRem(padding-bottom, 5);
+    font-weight: 500;
+  }
+  .dynamic-field {
+    margin-bottom: 5px !important;
+  }
+  .error-content {
+    margin-bottom: 10px;
+  }
+}
+
+.layout-dashboard .download-files ul li .list-item .new .delete-tag {
+  background-color: #F28686;
+  padding: 0 5px;
+  width: auto;
+  color: white;
+}

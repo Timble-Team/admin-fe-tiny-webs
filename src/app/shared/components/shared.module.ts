@@ -14,6 +14,9 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DialogModule} from 'primeng/dialog';
 import { DateTimePipe } from '../pipe/date.pipe';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 const PIPES = [
   EnumPipe,
@@ -24,16 +27,19 @@ const PIPES = [
 @NgModule({
   imports: [
     CommonModule,
+    DynamicDialogModule,
     AlertMessageModule,
     NewFormModule,
     TableModule,
     FormsModule,
-    ReactiveFormModule,
     ConfirmDialogModule,
+    InputSwitchModule,
     ToastModule,
     CardModule,
     TieredMenuModule,
     DialogModule,
+    ReactiveFormModule,
+    InputTextModule,
     ButtonModule,
     ReactiveFormsModule
   ],
@@ -42,10 +48,12 @@ const PIPES = [
     NewFormModule,
     ConfirmDialogModule,
     TableModule,
+    InputSwitchModule,
+    InputTextModule,
+    ReactiveFormModule,
     DialogModule,
     TieredMenuModule,
     CommonModule,
-    ReactiveFormModule,
     ToastModule,
     ButtonModule,
     CardModule,
@@ -56,11 +64,4 @@ const PIPES = [
   ]
 })
 
-export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule
-    };
-  }
-}
-
+export class SharedModule {}

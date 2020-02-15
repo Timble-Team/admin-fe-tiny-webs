@@ -1,0 +1,10 @@
+<div 
+  class="dynamic-field"
+  [ngClass]="submitted && group.controls[config.key].errors ? errorClassContainer : activeClassContainer" 
+  [formGroup]="group">
+  <p-inputSwitch 
+    [ngClass]="submitted && group.controls[config.key].errors ? errorClass : activeClass" 
+    [formControlName]="config.key">
+  </p-inputSwitch>
+  <span class="desc">{{config.inputType.description}}</span>
+</div>

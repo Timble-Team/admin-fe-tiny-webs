@@ -12,11 +12,15 @@ export class ArticleForm {
     },
     config: [
       {
-        label: 'Tên bài viết',
+        label: {
+          text: 'Tên bài viết',
+          extraClass: 'reactive-label'
+        },
         key: 'name',
         inputType: {
           name: 'input',
           type: 'text',
+          extraClass: 'ui-inputtext'
         },
         validation: [
           Validators.required
@@ -26,11 +30,14 @@ export class ArticleForm {
         },
       },
       {
-        label: 'Mô tả',
+        label: {
+          text: 'Mô tả ngắn',
+          extraClass: 'reactive-label'
+        },
         key: 'desc',
         inputType: {
-          name: 'input',
-          type: 'text',
+          name: 'textarea',
+          extraClass: 'ui-inputtext ui-corner-all ui-inputtextarea-resizable ui-state-default ui-widget'
         },
         validation: [
           Validators.required
@@ -40,25 +47,16 @@ export class ArticleForm {
         },
       },
       {
-        label: 'Nội dung',
-        key: 'content',
-        inputType: {
-          name: 'input',
-          type: 'text',
+        label: {
+          text: 'Ảnh bìa',
+          extraClass: 'reactive-label'
         },
-        validation: [
-          Validators.required
-        ],
-        errors: {
-          required: 'validator.required'
-        },
-      },
-      {
-        label: 'Ảnh bìa',
         key: 'cover',
         inputType: {
-          name: 'input',
-          type: 'text',
+          name: 'mediapicker',
+          options: {
+            path: 'pictures/articles'
+          }
         },
         validation: [
           Validators.required
@@ -68,26 +66,38 @@ export class ArticleForm {
         },
       },
       {
-        label: 'Public',
-        key: 'public',
+        label: {
+          text: 'Nội dung',
+          extraClass: 'reactive-label'
+        },
+        key: 'content',
         inputType: {
-          name: 'radio',
-          data: [
-            {
-              text: 'OFF',
-              value: false
-            },
-            {
-              text: 'ON',
-              value: true
-            }
-          ]
+          name: 'ckeditor',
+          options: {
+            path: 'pictures/articles'
+          }
         },
         validation: [
           Validators.required
         ],
         errors: {
           required: 'validator.required'
+        },
+      },
+      {
+        label: {
+          text: 'Public',
+          extraClass: 'reactive-label'
+        },
+        key: 'public',
+        inputType: {
+          name: 'switcher'
+        },
+        validation: [
+          Validators.required
+        ],
+        errors: {
+          required: 'Trường này là bắt buộc'
         },
       }
     ]

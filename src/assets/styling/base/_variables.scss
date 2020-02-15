@@ -1,0 +1,93 @@
+// == Fonts ===
+$font-family-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+// == Breakpoints ===
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 992px,
+  large: 1024px,
+  largest: 1280px,
+);
+
+$color: (
+  primary: #005AA0,
+  text-a: #2e3440,
+  text-b: #4c566a,
+  text-c: #5e81ac,
+  blue-light: #f4f4f4,
+  blue-a: #eceff4,
+  blue-b: #e5e9f0,
+  grey-a: #e8e8e8,
+  grey-b: #f9fafb
+);
+$font-size: (
+  xs: 10,
+  sm: 12,
+  md: 14,
+  lg: 18,
+  xl: 20,
+  xxl: 26
+);
+$font-family: (
+  icon: "icomoon"
+);
+$font-icon: (
+  icon-facebook: "\e923",
+  icon-comment-plus-outline: "\e93e",
+  icon-angle-right: "\e908",
+  icon-arrow: "\e909",
+  icon-calculator: "\e918",
+  icon-calendar: "\e919",
+  icon-camera: "\e91a",
+  icon-chevron-thin-left: "\e91b",
+  icon-circle-message: "\e91c",
+  icon-clock: "\e91d",
+  icon-close: "\e91e",
+  icon-clouds: "\e91f",
+  icon-cog: "\e920",
+  icon-down: "\e921",
+  icon-envelope: "\e922",
+  icon-fish-3: "\e924",
+  icon-fish: "\e925",
+  icon-fishs: "\e926",
+  icon-heart: "\e927",
+  icon-instagram: "\e928",
+  icon-location: "\e929",
+  icon-locked: "\e92a",
+  icon-log-out: "\e92b",
+  icon-menu: "\e92c",
+  icon-message: "\e92d",
+  icon-next-sms: "\e92e",
+  icon-next: "\e92f",
+  icon-notifications: "\e930",
+  icon-place: "\e931",
+  icon-preview: "\e932",
+  icon-question-circle-o: "\e933",
+  icon-rectangle: "\e934",
+  icon-search: "\e935",
+  icon-setting: "\e936",
+  icon-star: "\e937",
+  icon-sun: "\e938",
+  icon-temperature: "\e939",
+  icon-twitter: "\e93a",
+  icon-up: "\e93b",
+  icon-user: "\e93c",
+  icon-youtube: "\e93d",
+  icon-caret-down: "\e900",
+  icon-caret-up: "\e901",
+  icon-chevron-right: "\e902",
+  icon-chevron-left: "\e903",
+  icon-chevron-up: "\e904",
+  icon-chevron-down: "\e905",
+  icon-minus: "\e906",
+  icon-plus: "\e907"
+);
+
+// $backgroundOpacity: rgba(map-get($color, text), 0.4);
+// $backgroundOpacity70: rgba(map-get($color, text), 0.7);
+
+// $box-shadow: 1 1 5 1 rgba($color: black, $alpha: 0.16);
+// $light-shadow: 0 0 3 0 rgba($color: black, $alpha: 0.16);
+
+// $header-height: 70;

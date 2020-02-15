@@ -1,0 +1,4 @@
+.ui-inputtextarea-resizable {
+  width: 100%;
+  @include pxRem(height, 100);
+}

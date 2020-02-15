@@ -1,0 +1,88 @@
+header {
+  padding-left: 240px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  @include pxRem( padding-right, 50);
+  height: 75px;
+  display: flex;
+  z-index: 999;
+  align-items: center;
+  justify-content: space-between;
+  background-color: map-get($color, blue-a);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  .user-settings {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    .avatar {
+      @include pxRem(width, 50);
+      border-radius: 50%;
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: capitalize;
+      color: #4c566a;
+      margin: 0;
+    }
+    span {
+      font-size: 14px;
+      color: #9199a9;
+      text-transform: lowercase;
+    }
+    i {
+      font-size: 25px;
+    }
+  }
+}
+.profile-item-submenu {
+  @include pxRem(width, 250);
+  position: absolute;
+  top: 69px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  .profile-submenu-header {
+    background-image: url(https://www.primefaces.org/mirage-ng/assets/layout/images/topbar/bg-profilemenu@2x.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+    .profile {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    .profile-meta {
+      h4, span {
+        color: white;
+      }
+      span {
+        text-transform: lowercase;
+      }
+    }
+  }
+  .layout-submenu-item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(195, 204, 221, 0.3);
+    .menu-text {
+      padding-left: 10px;
+    }
+    p {
+      margin: 0;
+    }
+    &:hover {
+      background-color: #f9fafb;
+      transition: background-color 0.15s;
+    }
+  }
+  .layout-submenu-footer {
+    padding: 10px;
+    text-align: right;
+  }
+}

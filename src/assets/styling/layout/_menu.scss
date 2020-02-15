@@ -1,0 +1,80 @@
+// panel menu
+.ui-panelmenu {
+  overflow: hidden;
+  padding-top: 10px;
+  .ui-panelmenu-panel {
+    z-index: 10;
+    margin: 7px 0;
+    .ui-panelmenu-header-link {
+      padding: 8px 10px;
+      background: white;
+      border: 0;
+      color: map-get($color, text-b);
+      position: relative;
+      border-radius: 7px;
+      border: 1px solid map-get($color, blue-b);
+    }
+    .ui-menuitem {
+      position: relative;
+      margin: 0;
+    }
+    .ui-menuitem-icon {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 25px;
+    }
+    .ui-menuitem-text {
+      font-weight: normal;
+    }
+    .ui-panelmenu-icon {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+    }
+  }
+  .ui-panelmenu-header:not(.ui-state-active) {
+    a:hover {
+      border-radius: 7px;
+      border: 0 !important;
+      background-color: map-get($color, blue-light) !important;
+      color: map-get($color, text-c) !important;
+    }
+  }
+  .ui-panelmenu-header.ui-state-active > a {
+    border-radius: 7px 7px 0 0;
+    border: 0 !important;
+    background-color: map-get($color, text-c) !important;
+    color: white !important;
+  }
+  .ui-submenu-list {
+    background-color: map-get($color, grey-a);
+    border-radius: 0 0 7px 7px;
+    border: 0 !important;
+    .ui-menuitem-link {
+      color: map-get($color, text-b) !important;
+      .ui-menuitem-icon {
+        font-size: 17px;
+        right: 7px;
+      }
+    }
+  }
+  .ui-panelmenu-content {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+// tired menu
+.ui-tieredmenu {
+  border-radius: 7px !important;
+  .ui-menuitem-link {
+    span {
+      color: map-get($color, text-b) !important;
+    }
+  }
+}
+
