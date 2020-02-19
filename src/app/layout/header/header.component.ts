@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonService } from 'app/core/services/common.service';
 import { AdminEnum } from 'app/shared/enum/admin.enum';
+import { AuthService } from 'app/core/services/auth/auth.service';
 
 @Component({
 	selector: 'app-header',
@@ -11,6 +12,7 @@ export class HeaderComponent implements OnInit {
 	user: any;
 
 	constructor(
+		private authSevice: AuthService,
 		private common: CommonService
 	) {
 
@@ -23,5 +25,9 @@ export class HeaderComponent implements OnInit {
 				this.user.role = AdminEnum[this.user.adminType];
       }
     });
+	}
+
+	signout() {
+		this.authSevice.logout();
 	}
 }

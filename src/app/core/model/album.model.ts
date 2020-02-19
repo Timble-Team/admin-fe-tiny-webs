@@ -1,12 +1,17 @@
-export interface Agency {
-  name: string;
-  desc: string;
-  domain: string;
-  avatar: string;
-  phone: Number;
-  address: string;
-  public: Boolean;
-  expireDate: Date;
-  firebaseConfig?: Object;
-  _id?: string;
+export class Album {
+  album: any;
+
+  constructor(data) {
+    this.album = {
+      name: data.name,
+      cover: data.cover,
+      desc: data.desc,
+      photos: data.photos,
+      kind: data.kind,
+      createdAt: new Date(),
+      deletedAt: null,
+      public: data.public
+    };
+  }
 }
+

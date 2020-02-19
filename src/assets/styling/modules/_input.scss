@@ -2,3 +2,30 @@
   width: 100%;
   @include pxRem(height, 100);
 }
+.timeline {
+  .mirage-image-container {
+    position: relative;
+    @include pxRem(height, 150);
+    @include pxRem(width, 150);
+    @include pxRem(margin-right, 20);
+    // overflow: hidden;
+    box-shadow: 0 0 5px 0px rgba(145, 153, 169, 0.7);
+    border-radius: 7px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .remove-image-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+  }
+}
+.ui-dropdown-label {
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
+  color: #495057 !important;
+}

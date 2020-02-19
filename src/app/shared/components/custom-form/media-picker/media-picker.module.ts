@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MediaPickerComponent } from './media-picker.component';
 import { CustomMediaPickerComponent } from './custom-media-picker/custom-media-picker.component';
 import { ButtonModule } from 'primeng/button';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
     CommonModule,
     FormsModule,
     ButtonModule,
+    SharedModule,
     ReactiveFormsModule
   ],
   entryComponents: [

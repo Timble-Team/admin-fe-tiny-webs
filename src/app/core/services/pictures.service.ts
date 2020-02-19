@@ -133,7 +133,10 @@ export class PicturesService {
             // draw image
             ctx.drawImage(image, 0, 0, width, height);
             const dataUrl = canvas.toDataURL('image/jpeg', compress);
-            resolve(dataUrl);
+            resolve({
+              url: dataUrl,
+              file: this.dataURLToBlob(dataUrl)
+            });
           });
         };
       });
@@ -142,5 +145,91 @@ export class PicturesService {
         resolve(null);
       });
     }
+  }
+
+  /*
+    image, video, audio
+  */
+  checkFileExtension(contentType) {
+    return contentType.split('/')[0];
+  }
+
+  checkTypeFile(link) {
+    return new Promise((resolve, reject) => {
+      this.checkImageFile(link).then(res => {
+        resolve({
+          type: 'image',
+          status: 'success',
+          event: res
+        });
+      }).catch(imageError => {
+        this.checkVideoFile(link).then(res => {
+          resolve({
+            type: 'video',
+            status: 'success',
+            event: res
+          });
+        }).catch(videoError => {
+          this.checkAudioFile(link).then(res => {
+            resolve({
+              type: 'audio',
+              status: 'success',
+              event: res
+            });
+          }).catch(audioError => {
+            reject({
+              status: 'error',
+              event: [imageError, videoError, audioError]
+            });
+          });
+        });
+      });
+    });
+  }
+
+  checkImageFile(link) {
+    const img = document.createElement('img');
+    img.src = link;
+    return new Promise((resolve, reject) => {
+      img.onload = (e) => {
+        resolve(e);
+      };
+      img.onerror = (e) => {
+        reject(e);
+      };
+    });
+  }
+
+  checkVideoFile(link) {
+    const video = document.createElement('video');
+    const source = document.createElement('source');
+    video.src = link;
+    source.src = link;
+    video.appendChild(source);
+    return new Promise((resolve, reject) => {
+      video.onloadedmetadata = (e) => {
+        if (video.videoHeight && video.videoWidth) {
+          resolve(e);
+        } else {
+          reject(e);
+        }
+      };
+      video.onerror = (e) => {
+        reject(e);
+      };
+    });
+  }
+
+  checkAudioFile(link) {
+    const audio = document.createElement('audio');
+    audio.src = link;
+    return new Promise((resolve, reject) => {
+      audio.onloadstart = (e) => {
+        resolve(e);
+      };
+      audio.onerror = (e) => {
+        reject(e);
+      };
+    });
   }
 }

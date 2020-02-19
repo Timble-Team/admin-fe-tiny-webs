@@ -1,2 +1,28 @@
 <button pButton type="button" label="Import Media" (click)="uploadMedia()" icon="pi pi-cloud-upload"></button>
-{{link}}
+<div class="layout-dashboard">
+  <div class="timeline" *ngIf="links.length > 0">
+    <div class="timeline-row">
+      <h4>Danh sách File</h4>
+      <div class="timeline-images">
+        <div class="p-grid">
+          <div class="mirage-image-container" *ngFor="let item of links; let i = index">
+            <button 
+              type="button"
+              class="remove-image-btn ui-button-danger ui-button-rounded" 
+              pButton 
+              icon="pi pi-trash"
+              (click)="removeMedia(item, i)"></button>
+              <ng-container *ngIf="item.type === 'video'">
+                <video width="150" height="150" controls>
+                  <source [src]="item?.url | sanitizeUrl">
+                </video>
+              </ng-container>
+              <ng-container *ngIf="item.type === 'image'">
+                <img alt="mirage-layout" [src]="item?.url">
+              </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

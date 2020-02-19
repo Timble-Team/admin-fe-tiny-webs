@@ -9,6 +9,7 @@ export class CommonService {
   breadcrumb$: BehaviorSubject<any>;
   user$: BehaviorSubject<any>;
   agencies$: BehaviorSubject<any>;
+  loadingScreen$: BehaviorSubject<any>;
 
 
   constructor(
@@ -17,6 +18,11 @@ export class CommonService {
     this.breadcrumb$ = new BehaviorSubject<any>([]);
     this.user$ = new BehaviorSubject<any>(null);
     this.agencies$ = new BehaviorSubject<any>(null);
+    this.loadingScreen$ = new BehaviorSubject<any>(null);
+  }
+
+  setLoading(display, message = 'Please wait!') {
+    this.loadingScreen$.next({display, message});
   }
 
   setLocal(name: any, value: any) {
@@ -50,8 +56,13 @@ export class CommonService {
   }
 
   setUser(data) {
-    this.user$.next(data.user || null);
-    this.agencies$.next(data.agencies || null);
+    if (data) {
+      this.user$.next(data.user || null);
+      this.agencies$.next(data.agencies || null);
+    } else {
+      this.agencies$.next(null);
+      this.user$.next(null);
+    }
   }
 
   getUser() {

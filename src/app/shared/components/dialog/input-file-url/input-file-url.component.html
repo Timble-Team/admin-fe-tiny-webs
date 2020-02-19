@@ -1,19 +1,117 @@
-<p-card header="Thêm Link File">
+<h5 *ngIf="!config.data.multiple">Add duy nhất 1 media cho lĩnh vực này!</h5>
+<p-card header="Thêm IFRAME" *ngIf="config.data.iframe">
+  <div class="pt-5 layout-dashboard">
+    <form name="form" (ngSubmit)="g.form.valid && addIframe()" #g="ngForm" novalidate>
+      <span class="ui-float-label">
+        <input 
+          type="text" 
+          size="30" 
+          pInputText 
+          class="form-control" 
+          name="link" 
+          [pattern]="domainRegex" 
+          [(ngModel)]="currentIframeLink" 
+          #link="ngModel" 
+          [ngClass]="{ 'is-invalid': g.submitted && link.invalid }" 
+          required 
+        />
+        <label for="float-input">Thêm iframe tại đây</label>
+        <button 
+          class="ui-button-warning mr-2" 
+          pButton type="submit" 
+          label="Thêm"
+          icon="pi pi-pencil" 
+          [disabled]="!link">
+        </button>
+        <ng-container *ngIf="g.submitted && link.invalid" >
+          <p-message 
+            *ngIf="link.errors.pattern" 
+            severity="error"
+            text="Link không đúng format. Link phải bắt đầu bằng http hoặc https">
+          </p-message>
+        </ng-container>
+        <ng-container *ngIf="currentIframeLink && errorIframeLink">
+          <p-message 
+            severity="error"
+            text="Link không có data hợp lệ">
+          </p-message>
+        </ng-container>
+      </span>
+    </form>
+    <div class="download-files" *ngIf="linksIframe.length > 0">
+      <h4>Danh sách Iframe</h4>
+      <ul>
+        <li *ngFor="let directLink of linksIframe; let i = index">
+          <div class="p-grid list-item">
+            <div class="file-name">
+              <h2 class="name pr-5">{{directLink.iframe}} - {{directLink.url}}</h2>
+              <div class="new" (click)="removeLink(i)">
+                <div class="new-tag delete-tag"> Delete </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</p-card>
+<p-card header="Thêm Link">
   <small>Chú ý: link phải trỏ đến chính xác 1 file. Liên hệ bộ phận kĩ thuật nếu bạn chưa nắm rõ điều này.</small>
   <div class="pt-5 layout-dashboard">
-    <span class="ui-float-label">
-      <input id="float-input" type="text" size="30" [(ngModel)]="link" pInputText>
-      <label for="float-input">Thêm Link tại đây</label>
-      <button class="ui-button-warning" pButton type="button" label="Thêm" (click)="addLink()"
-        icon="pi pi-pencil" [disabled]="!link"></button>
-    </span>
+    <form name="form" (ngSubmit)="f.form.valid && addLink()" #f="ngForm" novalidate>
+      <span class="ui-float-label">
+        <input 
+          type="text" 
+          size="30" 
+          pInputText 
+          class="form-control" 
+          name="link" 
+          [pattern]="domainRegex" 
+          [(ngModel)]="currentLink" 
+          #link="ngModel" 
+          [ngClass]="{ 'is-invalid': f.submitted && link.invalid }" 
+          required 
+        />
+        <label for="float-input">Thêm Link tại đây</label>
+        <button 
+          class="ui-button-warning mr-2" 
+          pButton type="submit" 
+          label="Thêm"
+          icon="pi pi-pencil" 
+          [disabled]="!link">
+        </button>
+        <ng-container *ngIf="f.submitted && link.invalid" >
+          <p-message 
+            *ngIf="link.errors.pattern" 
+            severity="error"
+            text="Link không đúng format. Link phải bắt đầu bằng http hoặc https">
+          </p-message>
+        </ng-container>
+        <ng-container *ngIf="currentLink && errorLink">
+          <p-message 
+            severity="error"
+            text="Link không có data hợp lệ">
+          </p-message>
+        </ng-container>
+      </span>
+    </form>
     <div class="download-files" *ngIf="links.length > 0">
       <h4>Danh sách Link</h4>
       <ul>
         <li *ngFor="let directLink of links; let i = index">
           <div class="p-grid list-item">
             <div class="file-name">
-              <h2 class="name pr-5">{{directLink}}</h2>
+              <h2 class="name pr-5">
+                <ng-container *ngIf="directLink.type === 'image'">
+                  <i class="fas fa-image pr-2"></i>
+                </ng-container>
+                <ng-container *ngIf="directLink.type === 'video'">
+                  <i class="fas fa-video pr-2"></i>
+                </ng-container>
+                <ng-container *ngIf="directLink.type === 'audio'">
+                  <i class="fas fa-music pr-2"></i>
+                </ng-container>
+                {{directLink.url}}</h2>
               <div class="new" (click)="removeLink(i)">
                 <div class="new-tag delete-tag"> Delete </div>
               </div>
@@ -25,12 +123,50 @@
   </div>
 </p-card>
 <p-card header="Thêm File">
-  <p-fileUpload name="demo[]" accept="image/*" maxFileSize="10000000" customUpload="true" [showCancelButton]="false"
-    (uploadHandler)="myUploader($event)">
-    <!-- <ng-template pTemplate="toolbar">
-      <button pButton type="button" label="Upload" icon="pi pi-upload" (click)="onBeforeUpload($event)"></button>
-  </ng-template> 
-   [showUploadButton]="false"
-    [showCancelButton]="false"-->
+  <p-fileUpload 
+    name="demo[]" 
+    [multiple]="config.data.multiple" 
+    maxFileSize="10000000" 
+    [accept]="typeChoosen" 
+    customUpload="true"
+    [files]="files"
+    [showUploadButton]="false"
+    [showCancelButton]="false"
+    (onRemove)="onRemoveFile($event)"
+    (onSelect)="onSelectFile($event)">
   </p-fileUpload>
+</p-card>
+<p-card header="Tổng số file(s)">
+  <div class="mb-2">
+    <b>Tổng số:</b><span class="pd-2">{{ links.length + files.length }} file(s)</span>
+  </div>
+  <div class="flex-right">
+    <button
+      *ngIf="config.data.uploadNow"
+      class="ui-button-success mr-2" 
+      pButton 
+      type="button" 
+      label="Save"
+      icon="pi pi-save"
+      [disabled]="disabledSave"
+      (click)="myUploader()">
+    </button>
+    <button 
+      *ngIf="!config.data.uploadNow"
+      class="ui-button-success mr-2" 
+      pButton 
+      type="button" 
+      label="Save"
+      icon="pi pi-save"
+      [disabled]="disabledSave"
+      (click)="waitUploader()">
+    </button>
+    <button
+      pButton 
+      type="button"
+      label="Thoát"
+      icon="pi pi-times"
+      (click)="ref.close()">
+    </button>
+  </div>
 </p-card>

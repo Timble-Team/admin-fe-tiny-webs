@@ -1,0 +1,48 @@
+<p-card>
+  <p-header>
+    <div class="ui-card-body mt-2 mb-2">
+      <button class="float-right mb-2" pButton type="button" label="Tạo danh mục" (click)="openModal()"></button>
+    </div>
+  </p-header>
+  <p-table [value]="categories">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-category let-rowIndex="rowIndex">
+      <tr>
+        <td class="row-grid" *ngFor="let col of cols; let i = index">
+          {{category[col.field]}}
+          <span class="float-right" *ngIf="i === (cols.length - 1)" (click)="handleAction(category, $event)">
+            <i class="pi pi-ellipsis-v"></i>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td class="row-grid" [attr.colspan]="cols.length">
+          <p>Không tìm thấy dữ liệu</p>
+        </td>
+      </tr> 
+    </ng-template>
+    <ng-template pTemplate="loadingbody" let-columns="columns">
+      <tr style="height:34px">
+        <td *ngFor="let col of columns">
+          <div class="loading-text"></div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card> 
+<p-tieredMenu #menu [model]="items" appendTo="body" [popup]="true"></p-tieredMenu>
+<p-dialog header="Tạo danh mục" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false" [dismissableMask]="true">
+  <reactive-form
+    [configForm]="configForm.form"
+    (submitEmitter)="onSubmit($event)">
+  </reactive-form>
+</p-dialog>

@@ -32,7 +32,7 @@ export class SidebarData {
         },
         {
           label: 'Hình ảnh',
-          routerLink: '/pictures',
+          routerLink: '/albums',
           icon: 'pi pi-image'
         },
         {
@@ -66,7 +66,7 @@ export class SidebarData {
         },
         {
           label: 'Hình ảnh',
-          routerLink: '/pictures',
+          routerLink: '/albums',
           icon: 'pi pi-image'
         },
         {

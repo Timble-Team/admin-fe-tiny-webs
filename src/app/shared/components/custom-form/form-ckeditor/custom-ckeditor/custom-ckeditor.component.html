@@ -1,6 +1,7 @@
 <ckeditor 
   #myckeditor
   name="ckeditor"
+  [(ngModel)]="content"
   (change)="emitValue($event)"
   [config]="ckeConfig">
   <ckbutton

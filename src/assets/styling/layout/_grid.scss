@@ -74,3 +74,14 @@ $grid-gutter: 25;
   margin-left: -.5em;
   margin-top: -.5em;
 }
+.row-grid {
+  display: table-cell;
+  vertical-align: middle;
+  p {
+    text-align: center;
+  }
+}
+.td-image-box {
+  display: flex;
+  align-items: center;
+}

@@ -6,16 +6,16 @@
       <img class="avatar mt-2"
         src="https://cdn1.vectorstock.com/i/1000x1000/27/65/cute-boy-face-cartoon-vector-23302765.jpg" alt="avatar">
       <div class="pl-2 pr-2">
-        <h4>{{user.name}}</h4>
-        <span>{{user.role}}</span>
+        <h4>{{user?.name}}</h4>
+        <span>{{user?.role}}</span>
       </div>
       <i class="pi pi-caret-down"></i>
       <ul class="profile-item-submenu fadeInDown" [hidden]="!toggle">
         <li class="profile-submenu-header">
           <img class="profile mr-2" src="https://cdn1.vectorstock.com/i/1000x1000/27/65/cute-boy-face-cartoon-vector-23302765.jpg" width="40">
           <div class="profile-meta">
-            <h4>{{user.name}}</h4>
-            <span>{{user.role}}</span>
+            <h4>{{user?.name}}</h4>
+            <span>{{user?.role}}</span>
           </div>
         </li>
         <li class="layout-submenu-item">
@@ -30,7 +30,7 @@
             <p>Cài đặt</p><span>Settings</span>
           </div>
         </li>
-        <li class="layout-submenu-footer"><button class="signout-button">Đăng xuất</button></li>
+        <li class="layout-submenu-footer"><button class="signout-button" (click)="signout()">Đăng xuất</button></li>
       </ul>
     </div>
   </div>

@@ -23,6 +23,7 @@ export class CustomCkeditorComponent {
 
   onChange: Function;
   ckeConfig: any;
+  content: any;
 
   constructor(
     public dialogService: DialogService
@@ -48,19 +49,19 @@ export class CustomCkeditorComponent {
 
   uploadImg() {
     const ref = this.dialogService.open(InputFileUrlComponent, {
-      data: {
-        path: this.options.path
-      },
+      data: this.options,
       header: 'Media Panel',
       width: '70%',
-      // contentStyle: {'max-height': '350px', 'overflow': 'auto'}
+      contentStyle: {'max-height': '500px', 'overflow': 'auto'}
     });
 
     ref.onClose.subscribe(link => {
-      let imageTag;
-      imageTag = this.myckeditor.instance.document.createElement('img');
-      imageTag.setAttribute('src', link);
-      this.myckeditor.instance.insertElement(imageTag);
+      if (link !== undefined) {
+        let imageTag;
+        imageTag = this.myckeditor.instance.document.createElement('img');
+        imageTag.setAttribute('src', link[0].url);
+        this.myckeditor.instance.insertElement(imageTag);
+      }
     });
   }
 
@@ -76,5 +77,6 @@ export class CustomCkeditorComponent {
   }
 
   writeValue( value ) {
+    this.content = value;
   }
 }

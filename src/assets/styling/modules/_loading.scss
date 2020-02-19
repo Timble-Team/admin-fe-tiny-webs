@@ -1,0 +1,12 @@
+#loadingScreen {
+  background-color: rgba(255,255,255,0.8);
+  position: fixed;
+  z-index: 1000;
+  p {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NewFormModule } from './new-form/new-form.module';
 import { EnumPipe } from '../pipe/enum.pipe';
 import { PermissionPipe } from '../pipe/permission.pipe';
 import { AlertMessageModule } from './alert-message/alert-message.module';
@@ -17,11 +16,15 @@ import { DateTimePipe } from '../pipe/date.pipe';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { FileSizePipe } from '../pipe/bytes.pipe';
+import { SanitizeUrlPipe } from '../pipe/sanitizeUrl.pipe';
 
 const PIPES = [
   EnumPipe,
   DateTimePipe,
-  PermissionPipe
+  FileSizePipe,
+  PermissionPipe,
+  SanitizeUrlPipe
 ];
 
 @NgModule({
@@ -29,7 +32,6 @@ const PIPES = [
     CommonModule,
     DynamicDialogModule,
     AlertMessageModule,
-    NewFormModule,
     TableModule,
     FormsModule,
     ConfirmDialogModule,
@@ -45,7 +47,6 @@ const PIPES = [
   ],
   exports: [
     AlertMessageModule,
-    NewFormModule,
     ConfirmDialogModule,
     TableModule,
     InputSwitchModule,

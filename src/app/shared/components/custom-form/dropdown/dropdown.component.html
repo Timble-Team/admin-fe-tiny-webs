@@ -1,0 +1,12 @@
+<div 
+  class="dynamic-field"
+  [ngClass]="submitted && group.controls[config.key].errors ? errorClassContainer : activeClassContainer" 
+  [formGroup]="group">
+  <p-dropdown 
+    [ngClass]="submitted && group.controls[config.key].errors ? errorClass : activeClass" 
+    [formControlName]="config.key"
+    [options]="config.inputType.data" 
+    [placeholder]="config.inputType.placeholder">
+  </p-dropdown>
+  <span class="desc">{{config.inputType.description}}</span>
+</div>

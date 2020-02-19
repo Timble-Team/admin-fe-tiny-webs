@@ -17,6 +17,7 @@ import { FirebaseService } from 'app/core/services/api/firebase.service';
 import { ApiService } from 'app/core/services/api/api.service';
 import { AppConfigService } from 'app/core/services/api/config.service';
 import { SidebarModule } from 'primeng/sidebar';
+import { LoadingScreenModule } from 'app/shared/components/loading-screen/loading-screen.module';
 
 
 const routes: Routes = [
@@ -32,6 +33,18 @@ const routes: Routes = [
 			{
 				path: 'articles',
 				loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule)
+			},
+			{
+				path: 'albums',
+				loadChildren: () => import('./albums/albums.module').then(m => m.AlbumsModule)
+			},
+			{
+				path: 'categories',
+				loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+			},
+			{
+				path: 'videos',
+				loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule)
 			}
 		]
 	}
@@ -47,6 +60,7 @@ const routes: Routes = [
 		FullCalendarModule,
 		ChartsModule,
 		PagesModule,
+		LoadingScreenModule,
 		SharedModule,
 		SidebarModule,
 		RouterModule.forChild(routes)

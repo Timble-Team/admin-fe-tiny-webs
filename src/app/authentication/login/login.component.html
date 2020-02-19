@@ -1,0 +1,17 @@
+<div class="login-panel">
+	<h2 class="mb-4">Đăng Nhập</h2>
+	<p class="mb-6">Vui lòng sử dụng thông tin được cấp để đăng nhập vào admin.</p>
+	<reactive-form
+		[configForm]="loginForm.form"
+		(submitEmitter)="onSubmit($event)">
+	</reactive-form>
+	<div class="submit-section mt-5">
+		<button 
+			class="ui-button-primary" 
+			pButton 
+			(click)="submitForm()"
+			label="Đăng nhập">
+		</button>
+		<a href="#">Quên mật khẩu?</a>
+	</div>
+</div>

@@ -11,6 +11,8 @@ import { CardModule } from 'primeng/card';
 import {InputTextModule} from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { MessageModule } from 'primeng/message';
+import { FormDropdownModule } from './components/custom-form/dropdown/dropdown.module';
 
 const COMPONENTS = [
   InputFileUrlComponent,
@@ -27,8 +29,10 @@ const ENTRY_COMPONENTS = [
     FileUploadModule,
     CKEditorModule,
     CardModule,
+    MessageModule,
     InputTextModule,
     ButtonModule,
+    FormDropdownModule,
     ToggleButtonModule,
     MediaPickerModule,
     FormCkeditorModule

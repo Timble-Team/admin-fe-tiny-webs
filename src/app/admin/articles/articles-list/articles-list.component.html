@@ -14,10 +14,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-article let-rowIndex="rowIndex">
       <tr>
-        <td *ngFor="let col of cols; let i = index">
+        <td class="row-grid" *ngFor="let col of cols; let i = index">
           <ng-container *ngIf="col.field === 'name'">
-            <img style="width: 100px; padding-right: 20px" [src]="'https://aphoto.vn/wp-content/uploads/2018/02/anh-dep-chup-dien-thoai.jpg'" alt="article-cover">
-            <span>{{article.name}}</span>
+            <div class="td-image-box">
+              <img style="width: 100px; padding-right: 20px" [src]="article.cover?.url" alt="article-cover">
+              <span>{{article.name}}</span>
+            </div>
           </ng-container>
           <ng-container *ngIf="col.field === 'createdAt'">
             <span>{{article.createdAt | dateTime: 'HH:mm dd-MM-yyyy' : 'timestamp' }}</span>
@@ -25,7 +27,7 @@
           <ng-container *ngIf="col.field !== 'name' && col.field !== 'createdAt'">
             {{article[col.field]}}
           </ng-container>
-          <span class="float-right" *ngIf="i === (cols.length - 1)" (click)="handleAction(rowIndex, $event)">
+          <span class="float-right" *ngIf="i === (cols.length - 1)" (click)="handleAction(article.id, $event)">
             <i class="pi pi-ellipsis-v"></i>
           </span>
         </td>
@@ -40,12 +42,4 @@
     </ng-template>
   </p-table>
 </p-card> 
-<!-- <p-tieredMenu #menu [model]="items" appendTo="body" [popup]="true"></p-tieredMenu>
-<p-dialog header="Thêm User cho đơn vị" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="false" [dismissableMask]="true">
-    <p><b>Đơn vị: </b>{{currentItem?.name}}</p>
-    <reactive-form
-      [configForm]="configForm.form"
-      (submitEmitter)="onSubmit($event)">
-    </reactive-form>
-</p-dialog> -->
+<p-tieredMenu #menu [model]="items" appendTo="body" [popup]="true"></p-tieredMenu>
