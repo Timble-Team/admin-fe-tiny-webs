@@ -9,7 +9,9 @@
 npm install
 npm run build.dev
 
+echo "Starting Remove Dist"
 ssh -o StrictHostKeyChecking=no deploy@178.128.22.245 "cd /var/www/timble-tiny-web && rm -rf ./admin-page.dev/*"
+echo "Starting Copy Deploy File"
 scp -r -o StrictHostKeyChecking=no dist/* deploy@178.128.22.245:/var/www/timble-tiny-web/admin-page.dev 
 
 # set -e
