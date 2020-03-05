@@ -10,7 +10,7 @@ npm install
 npm run build
 
 ssh -o StrictHostKeyChecking=no deploy@178.128.22.245 "cd /var/www/timble-tiny-web && rm -rf ./admin-page/*"
-scp -r -o StrictHostKeyChecking=no dist/* deploy@theclassic.studio:/var/www/timble-tiny-web/admin-page 
+scp -r -o StrictHostKeyChecking=no dist/* deploy@178.128.22.245:/var/www/timble-tiny-web/admin-page 
 
 # set -e
 #   reset="\033[0m"
