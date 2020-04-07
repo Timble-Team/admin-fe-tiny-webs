@@ -18,3 +18,14 @@ export function calcEnumTypeString(e: any) {
   return obj;
 }
 
+export class NotNullObj {
+  constructor(data) {
+    const obj  = {};
+    Object.keys(data).forEach(x => {
+      if (data[x]) {
+        obj[x] = data[x];
+      }
+    });
+    return obj;
+  }
+}
