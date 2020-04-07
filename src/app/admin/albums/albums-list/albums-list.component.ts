@@ -13,7 +13,9 @@ export class AlbumsListComponent implements OnInit {
   items: MenuItem[];
   currentId: any;
   categories = [];
-  albums: Album[];
+  albums: Album[] = [];
+  totalRecords = 0;
+  lastDoc: any;
   @ViewChild('menu', {static: false}) menu: ElementRef;
 
   constructor(
@@ -39,17 +41,6 @@ export class AlbumsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firebase.listPublicRecords('Album').then(data => {
-      this.firebase.listRecords('Category', {key: 'type', value: 'Album', compared: '=='}).then(dataCat => {
-        this.categories = this.firebase.convertRecord(dataCat);
-        this.albums = this.firebase.convertRecord(data).map((x: any) => {
-          const nameObj = this.categories.find(cat => +cat.key === +x.kind);
-          x.total = x.photos.length;
-          x.kind = nameObj ? nameObj.name : 'undefined';
-          return x;
-        });
-      });
-    });
     this.cols = [
       { field: 'name', header: 'Tên album' },
       { field: 'desc', header: 'Mô tả' },
@@ -58,6 +49,27 @@ export class AlbumsListComponent implements OnInit {
       { field: 'createdAt', header: 'Ngày tạo' },
       { field: 'public', header: 'Công Khai' }
     ];
+    this.getCategoriesAndAlbums();
+  }
+
+  getCategoriesAndAlbums() {
+    this.firebase.listRecords('Category', {key: 'type', value: 'Album', compared: '=='}).then(dataCat => {
+      this.categories = this.firebase.convertRecord(dataCat);
+      this.getAlbums();
+    });
+  }
+
+  getAlbums() {
+    this.firebase.listPublicRecords('Album', undefined, undefined, undefined, this.lastDoc).then(data => {
+      const albums = this.firebase.convertRecord(data).map((x: any) => {
+        const nameObj = this.categories.find(cat => +cat.key === +x.kind);
+        x.total = x.photos.length;
+        x.kind = nameObj ? nameObj.name : 'undefined';
+        return x;
+      });
+      this.albums = [...this.albums, ...albums];
+      this.lastDoc = data.docs[data.docs.length - 1];
+    });
   }
 
   albumAction (e) {

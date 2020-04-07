@@ -41,6 +41,17 @@ export class SidebarData {
           icon: 'pi pi-video'
         }
       ]
+    },
+    {
+      label: 'Script',
+      icon: 'pi pi-question',
+      items: [
+        {
+          label: 'Tạo Record',
+          routerLink: '/scripts',
+          icon: 'pi pi-pencil'
+        }
+      ]
     }
   ];
 
@@ -73,6 +84,17 @@ export class SidebarData {
           label: 'Videos',
           routerLink: '/videos',
           icon: 'pi pi-video'
+        }
+      ]
+    },
+    {
+      label: 'Script',
+      icon: 'pi pi-question',
+      items: [
+        {
+          label: 'Tạo Record',
+          routerLink: '/scripts',
+          icon: 'pi pi-pencil'
         }
       ]
     }

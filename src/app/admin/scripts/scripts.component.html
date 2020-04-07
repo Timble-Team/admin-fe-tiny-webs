@@ -1,0 +1,11 @@
+<input [(ngModel)]="currentLabel">
+<button class="mb-2 ui-button-primary" pButton type="button" (click)="onSubmit()"  label="submit"></button>
+<h2>collections</h2>
+<ul class="f-row">
+  <li class="pr-2" *ngFor="let collection of collections; let i = index">
+    <button *ngIf="i%2 !== 0" class="mb-2 ui-button-success" pButton type="button" [label]="collection.label"></button>
+    <button *ngIf="i%2 === 0" class="mb-2 ui-button-primary" pButton type="button" [label]="collection.label"></button>
+  </li>
+</ul>
+<textarea rows="40" cols="100" [(ngModel)]="data"></textarea><br>
+<button class="mt-2 ui-button-warning" pButton type="button" label="Tạo records" (click)="createRecords()"></button>

@@ -45,6 +45,10 @@ const routes: Routes = [
 			{
 				path: 'videos',
 				loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule)
+			},
+			{
+				path: 'scripts',
+				loadChildren: () => import('./scripts/scripts.module').then(m => m.ScriptsModule)
 			}
 		]
 	}

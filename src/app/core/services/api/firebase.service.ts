@@ -77,11 +77,39 @@ export class FirebaseService {
     return this.firestore.collection(collection).doc(id).get().toPromise();
   }
 
+  multipleCollection(arrCollection) {
+    let tempRequest: any = this.firestore;
+    arrCollection.forEach(x => {
+      if (x.id) {
+        tempRequest = tempRequest.collection(x.collection).doc(x.id);
+      } else {
+        tempRequest = tempRequest.collection(x.collection);
+      }
+    });
+    return tempRequest;
+  }
+
+  createMultipleRecords(arrCollection, dataArray) {
+    const tempRequest: any = this.multipleCollection(arrCollection).ref;
+    const batch: any = this.firestore.firestore.batch();
+
+    dataArray.forEach((doc) => {
+      batch.set(tempRequest.doc(), doc);
+    });
+    return new Promise((resolve, reject) => {
+      batch.commit().then((res) => {
+        resolve(res);
+      }).catch(e => {
+        reject(e);
+      });
+    });
+  }
+
   /*
     condition: {key, compared, value}
     order: {key, by}
   */
-  listRecords(collection, condition = null, order = null) {
+  listRecords(collection, condition = null, order = null, limit = 7, lastIndex = null) {
     let request;
     if (condition) {
       if (condition.length) {
@@ -96,11 +124,14 @@ export class FirebaseService {
       request = this.firestore.collection(collection).ref;
     }
     request = order ? request.orderBy(order.key, order.by) : request;
+    request = lastIndex ? request.startAfter(lastIndex) : request;
+    request = limit ? request.limit(limit) : request;
     return request.get();
   }
 
-  listPublicRecords(collection, condition = this.publicCond, order = null) {
-    return this.listRecords(collection, condition, order);
+  listPublicRecords(collection, extraCondition = [], order = null, limit = 7, lastIndex = null) {
+    const objCond = [...extraCondition, ...this.publicCond];
+    return this.listRecords(collection, objCond, order, limit, lastIndex);
   }
 
   editRecord(collection, id, body) {

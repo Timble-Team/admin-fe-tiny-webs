@@ -36,6 +36,10 @@ $grid-gutter: 25;
 // Remove gutters (margin, padding) of row & col
 .f-row-no-gutters {
   $grid-gutter: 0px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Grid for all screen

@@ -19,6 +19,9 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { FileSizePipe } from '../pipe/bytes.pipe';
 import { SanitizeUrlPipe } from '../pipe/sanitizeUrl.pipe';
 
+import { FilterToolbarModule } from './filter-toolbar/filter-toolbar.module';
+import { PaginationModule } from './pagination/pagination.module';
+
 const PIPES = [
   EnumPipe,
   DateTimePipe,
@@ -39,7 +42,9 @@ const PIPES = [
     ToastModule,
     CardModule,
     TieredMenuModule,
+    FilterToolbarModule,
     DialogModule,
+    PaginationModule,
     ReactiveFormModule,
     InputTextModule,
     ButtonModule,
@@ -50,7 +55,9 @@ const PIPES = [
     ConfirmDialogModule,
     TableModule,
     InputSwitchModule,
+    PaginationModule,
     InputTextModule,
+    FilterToolbarModule,
     ReactiveFormModule,
     DialogModule,
     TieredMenuModule,
