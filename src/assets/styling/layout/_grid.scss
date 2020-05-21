@@ -33,6 +33,59 @@ $grid-gutter: 25;
   }
 }
 
+.f-row {
+  display: flex;
+  flex-direction: row;
+  &.f-space-between {
+    justify-content: space-between;
+  }
+  &.f-center {
+    align-items: center;
+    justify-content: center;
+  }
+  &.f-center-y {
+    justify-content: center;
+  }
+  &.f-center-x {
+    align-items: center;
+  }
+  &.f-space-evenly {
+    justify-content: space-evenly;
+  }
+  &.f-center-y {
+    align-items: center;
+  }
+  &.f-end-x {
+    justify-content: flex-end;
+  }
+}
+.f-d-col {
+  display: flex;
+  flex-direction: column;
+  &.f-space-between {
+    justify-content: space-between;
+  }
+}
+.f-col {
+  display: flex;
+  &.f-col-1 {
+    flex: 1;
+  }
+  &.f-center {
+    align-items: center;
+    justify-content: center;
+  }
+  &.f-center-x {
+    justify-content: center;
+  }
+  &.f-center-y {
+    align-items: center;
+  }
+  &.f-end-x {
+    justify-content: flex-end;
+  }
+}
+
 // Remove gutters (margin, padding) of row & col
 .f-row-no-gutters {
   $grid-gutter: 0px;

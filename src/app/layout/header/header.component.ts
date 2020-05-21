@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit() {
 		this.common.user$.subscribe(user => {
+			console.log(user);
       if (user) {
 				this.user = user;
 				this.user.role = AdminEnum[this.user.adminType];

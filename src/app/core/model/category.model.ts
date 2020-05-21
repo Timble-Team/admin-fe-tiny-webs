@@ -12,8 +12,7 @@ export class Category {
 }
 
 export enum CategoryTypeEnum {
-  'Article',
-  'Album',
-  'Video',
-  'Picture'
+  'article',
+  'album',
+  'video',
 }

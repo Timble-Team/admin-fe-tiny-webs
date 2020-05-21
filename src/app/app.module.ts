@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, PLATFORM_ID, NgZone } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -23,6 +23,12 @@ import { ThemeModule } from 'app/shared/theme.module';
 import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import {
+  MainAppStoreFactoryService,
+  MainAppAuthFactoryService,
+  MainAppStoreFactory,
+  MainAppAuthFactory } from './core/services/api/firebase.factory';
 
 export function appInit(appConfigService: AppConfigService) {
 	return appConfigService.load();
@@ -47,7 +53,8 @@ export function appInit(appConfigService: AppConfigService) {
     HttpClientModule,
     AngularFireModule,
 		AngularFirestoreModule,
-		AngularFireStorageModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [
     DialogService,
@@ -59,7 +66,9 @@ export function appInit(appConfigService: AppConfigService) {
       provide: FirebaseOptionsToken,
       deps: [AppConfigService],
       useFactory: appInit
-    }
+    },
+    { provide: MainAppStoreFactoryService, deps: [PLATFORM_ID, NgZone], useFactory: MainAppStoreFactory },
+    { provide: MainAppAuthFactoryService, deps: [PLATFORM_ID, NgZone], useFactory: MainAppAuthFactory }
   ],
   bootstrap: [AppComponent]
 })

@@ -204,6 +204,12 @@ export class InputFileUrlComponent implements OnInit {
     if (this.currentIframeLink.indexOf('youtube.com') !== -1) {
       iframeType = 'youtube';
     }
+    if (this.currentIframeLink.indexOf('google.com') !== -1) {
+      iframeType = 'google';
+    }
+    if (this.currentIframeLink.indexOf('vimeo.com') !== -1) {
+      iframeType = 'vimeo';
+    }
     const link: LinkFormat = {
       url: this.currentIframeLink,
       type: 'video',

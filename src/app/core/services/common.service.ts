@@ -2,6 +2,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { articleFormData } from './default-config/article.form';
+import { videoFormData } from './default-config/video.form';
+import { albumFormData } from './default-config/album.form';
 
 @Injectable({providedIn: 'root'})
 export class CommonService {
@@ -10,7 +13,26 @@ export class CommonService {
   user$: BehaviorSubject<any>;
   agencies$: BehaviorSubject<any>;
   loadingScreen$: BehaviorSubject<any>;
+  collections$: BehaviorSubject<any>;
+  categories$: BehaviorSubject<any>;
 
+  defaultCollections = [
+    {
+      formConfig: articleFormData,
+      id: 'articles',
+      name: 'bài viết'
+    },
+    {
+      formConfig: videoFormData,
+      id: 'videos',
+      name: 'video'
+    },
+    {
+      formConfig: albumFormData,
+      id: 'albums',
+      name: 'album'
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute
@@ -19,6 +41,35 @@ export class CommonService {
     this.user$ = new BehaviorSubject<any>(null);
     this.agencies$ = new BehaviorSubject<any>(null);
     this.loadingScreen$ = new BehaviorSubject<any>(null);
+    this.categories$ = new BehaviorSubject<any>(null);
+    this.collections$ = new BehaviorSubject<any>(this.defaultCollections);
+  }
+
+  convertRecord(res) {
+    try {
+      if (res.data()) {
+        return {
+          id: res.id,
+          ...res.data()
+        };
+      }
+    } catch (e) {
+      const sum = [];
+      res.forEach(doc => {
+        sum.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+      return sum;
+    }
+  }
+
+  setCollection(value) {
+    this.collections$.next([
+      ...this.defaultCollections,
+      ...value
+    ]);
   }
 
   setLoading(display, message = 'Please wait!') {
@@ -55,14 +106,12 @@ export class CommonService {
     this.breadcrumb$.next(value);
   }
 
-  setUser(data) {
-    if (data) {
-      this.user$.next(data.user || null);
-      this.agencies$.next(data.agencies || null);
-    } else {
-      this.agencies$.next(null);
-      this.user$.next(null);
-    }
+  setCurrentUser(user) {
+    this.user$.next(user);
+  }
+
+  setCurrentAgencies(agencies) {
+    this.agencies$.next(agencies);
   }
 
   getUser() {

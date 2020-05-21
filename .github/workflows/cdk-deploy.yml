@@ -1,0 +1,49 @@
+name: cdk deploy
+
+on:
+  push:
+    # branches:
+    #   - develop
+    tags:
+      - 'v*'
+jobs:
+  firebase_deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Hello world
+        run: echo Hello world $FIRST_NAME $middle_name
+        env:
+          FIRST_NAME: Mona
+          middle_name: The
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Setup firebase CLI
+        run: |
+          npm install -g firebase-tools
+
+      - name: Setup dependencies
+        run: npm install
+
+      - name: Build Code
+        run: |
+          npm run build.prod
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.key }}
+          source: "dist"
+          target: "/var/www/timble.asia/html"
+
+      
+
+

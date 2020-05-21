@@ -43,7 +43,7 @@ export class AgencyForm {
           extraClass: 'ui-inputtext ui-corner-all ui-inputtextarea-resizable ui-state-default ui-widget'
         },
         validation: [
-          Validators.required
+          // Validators.required
         ],
         errors: {
           required: 'Trường này là bắt buộc'
