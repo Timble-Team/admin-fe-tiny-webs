@@ -22,18 +22,12 @@ jobs:
         run: |
           npm install -g firebase-tools
 
-      - name: list files
-        run: |
-          ls
-      
-      - name: check connection server
-        uses: garygrossgarten/github-action-scp@release
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
         with:
+          command: ls -a
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          privateKey: ${{ secrets.KEY }}
-          local: ./
-          remote: ~/
+          privateKey: ${{ secrets.PRIVATE_KEY}}
 
       - name: Setup dependencies
         run: npm install
