@@ -10,11 +10,14 @@ jobs:
   firebase_deploy:
     runs-on: ubuntu-18.04
     steps:
-      - name: Hello world
-        run: echo Hello world $FIRST_NAME $middle_name
-        env:
-          FIRST_NAME: Mona
-          middle_name: The
+      - name: check connection server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "./README.md"
+          target: "~/"
 
       - name: Checkout
         uses: actions/checkout@v1
