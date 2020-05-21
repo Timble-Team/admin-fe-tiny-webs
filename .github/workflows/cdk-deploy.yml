@@ -27,6 +27,7 @@ jobs:
         with:
           command: ls -a
           host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
 
       - name: Setup dependencies
