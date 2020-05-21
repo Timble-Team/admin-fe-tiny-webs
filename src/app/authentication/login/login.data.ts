@@ -13,31 +13,13 @@ export class LoginForm {
     config: [
       {
         label: {
-          text: 'Username',
+          text: 'Email',
           extraClass: 'reactive-label'
         },
         key: 'email',
         inputType: {
           name: 'input',
           type: 'text',
-          extraClass: 'ui-inputtext'
-        },
-        validation: [
-          Validators.required
-        ],
-        errors: {
-          required: 'Trường này là bắt buộc'
-        },
-      },
-      {
-        label: {
-          text: 'Password',
-          extraClass: 'reactive-label'
-        },
-        key: 'password',
-        inputType: {
-          name: 'input',
-          type: 'password',
           extraClass: 'ui-inputtext'
         },
         validation: [

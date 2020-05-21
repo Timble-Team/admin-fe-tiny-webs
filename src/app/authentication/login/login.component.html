@@ -1,6 +1,6 @@
 <div class="login-panel">
 	<h2 class="mb-4">Đăng Nhập</h2>
-	<p class="mb-6">Vui lòng sử dụng thông tin được cấp để đăng nhập vào admin.</p>
+	<p class="mb-6">Vui lòng chọn hình thức đăng nhập.</p>
 	<reactive-form
 		[configForm]="loginForm.form"
 		(submitEmitter)="onSubmit($event)">
@@ -12,6 +12,41 @@
 			(click)="submitForm()"
 			label="Đăng nhập">
 		</button>
-		<a href="#">Quên mật khẩu?</a>
 	</div>
+	<!-- <div class="f-row f-center-y">
+		<button (click)="GoogleAuth()" style="width: 50px; height: 50px; border-radius: 50%" class="ui-button-danger mr-2" pButton type="button" icon="fa fa-google"></button>
+		<button (click)="setMethod('phone')" style="width: 50px; height: 50px; border-radius: 50%" class="ui-button-info ml-2" pButton type="button" icon="fa fa-phone"></button>
+	</div> -->
+	<!-- <ng-container [ngSwitch]="loginMethod">
+		<ng-container *ngSwitchCase="'gmail'">
+			<reactive-form
+				[configForm]="loginForm.form"
+				(submitEmitter)="onSubmit($event)">
+			</reactive-form>
+			<div class="submit-section mt-5">
+				<button 
+					class="ui-button-primary" 
+					pButton 
+					(click)="submitForm()"
+					label="Đăng nhập">
+				</button>
+				<a href="#">Quên mật khẩu?</a>
+			</div>
+		</ng-container>
+		<ng-container *ngSwitchCase="'phone'">
+			<reactive-form
+				[configForm]="loginForm.form"
+				(submitEmitter)="onSubmit($event)">
+			</reactive-form>
+			<div class="submit-section mt-5">
+				<button 
+					class="ui-button-primary" 
+					pButton 
+					(click)="submitForm()"
+					label="Đăng nhập">
+				</button>
+				<a href="#">Quên mật khẩu?</a>
+			</div>
+		</ng-container>
+	</ng-container> -->
 </div>

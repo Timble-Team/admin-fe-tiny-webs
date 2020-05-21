@@ -4,9 +4,9 @@
   <div class="header-right">
     <div class="user-settings" (click)="toggle = !toggle">
       <img class="avatar mt-2"
-        src="https://cdn1.vectorstock.com/i/1000x1000/27/65/cute-boy-face-cartoon-vector-23302765.jpg" alt="avatar">
+        [src]="user?.photoURL" alt="avatar">
       <div class="pl-2 pr-2">
-        <h4>{{user?.name}}</h4>
+        <h4>{{user?.displayName}}</h4>
         <span>{{user?.role}}</span>
       </div>
       <i class="pi pi-caret-down"></i>

@@ -16,22 +16,16 @@ export class AuthService {
     private location: Location
   ) {}
 
-  isLoggedIn(): boolean {
-    const url = this.location.path();
-    return url && url.indexOf('login') === -1;
-  }
-
-  getAccessToken(): string {
-    return localStorage.getItem('ACCESS_TOKEN');
-  }
-
-  isAccessTokenExpired() {
-    if (this.isTokenExpired('ACCESS_TOKEN')) {
-      localStorage.removeItem('ACCESS_TOKEN');
+  isLoggedIn(): Boolean {
+    if (localStorage.getItem('AGENCY_ID') && localStorage.getItem('USER_ID')) {
       return true;
     } else {
       return false;
     }
+  }
+
+  getAccessToken(): string {
+    return localStorage.getItem('ACCESS_TOKEN');
   }
 
   /**
@@ -59,8 +53,10 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('ACCESS_TOKEN');
-    this.common.setUser(null);
+    localStorage.removeItem('AGENCY_ID');
+    localStorage.removeItem('USER_ID');
+    this.common.setCurrentUser(null);
+    this.common.setCurrentAgencies(null);
     this.router.navigateByUrl('/auth/login');
   }
 }

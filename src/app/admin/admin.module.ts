@@ -10,14 +10,12 @@ import { PagesModule } from '../pages/pages.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from 'app/shared/components/shared.module';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
 import { FirebaseService } from 'app/core/services/api/firebase.service';
-import { ApiService } from 'app/core/services/api/api.service';
 import { AppConfigService } from 'app/core/services/api/config.service';
 import { SidebarModule } from 'primeng/sidebar';
 import { LoadingScreenModule } from 'app/shared/components/loading-screen/loading-screen.module';
+import { InstanceGuard } from 'app/core/services/auth/auth-guard';
+import { CanDeactivateGuard } from 'app/core/services/can-deactivate-guard.service';
 
 
 const routes: Routes = [
@@ -27,29 +25,30 @@ const routes: Routes = [
 		children: [
 			{ path: '', redirectTo: 'dashboard'},
 			{
+				path: 'dashboard',
+				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+			},
+			{
 				path: 'agencies',
 				loadChildren: () => import('./agencies/agencies.module').then(m => m.AgenciesModule)
-			},
-			{
-				path: 'articles',
-				loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule)
-			},
-			{
-				path: 'albums',
-				loadChildren: () => import('./albums/albums.module').then(m => m.AlbumsModule)
 			},
 			{
 				path: 'categories',
 				loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
 			},
 			{
-				path: 'videos',
-				loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule)
+				path: 'users',
+				loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
 			},
 			{
 				path: 'scripts',
 				loadChildren: () => import('./scripts/scripts.module').then(m => m.ScriptsModule)
-			}
+			},
+			{
+				path: ':instance',
+				canActivate: [InstanceGuard],
+				loadChildren: () => import('./instance/instance.module').then(m => m.InstanceModule)
+			},
 		]
 	}
 ];
@@ -74,7 +73,8 @@ const routes: Routes = [
 	],
 	providers: [
 		FirebaseService,
-		AppConfigService
+		AppConfigService,
+		CanDeactivateGuard
 	]
 })
 export class AdminModule { }

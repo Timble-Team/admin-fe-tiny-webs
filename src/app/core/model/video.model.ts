@@ -10,7 +10,8 @@ export class Video {
       source: data.source,
       createdAt: new Date(),
       deletedAt: null,
-      public: data.public
+      public: data.public,
+      attachments: data.attachments
     };
   }
 }

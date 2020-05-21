@@ -10,7 +10,8 @@ export class Album {
       kind: data.kind,
       createdAt: new Date(),
       deletedAt: null,
-      public: data.public
+      public: data.public,
+      attachments: data.attachments
     };
   }
 }

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { SidebarService } from '../services/sidebar.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ThemeService } from '../services/theme.service';
@@ -12,12 +12,14 @@ import { CommonService } from 'app/core/services/common.service';
 import * as firebase from 'firebase';
 import { ApiService } from 'app/core/services/api/api.service';
 import { Agency } from 'app/core/model/agency.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from 'app/core/model/user.model';
 
 @Component({
 	selector: 'app-admin',
 	templateUrl: './admin.component.html'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
 
 	checked: any;
 
@@ -39,7 +41,10 @@ export class AdminComponent {
 	// dataSideBar: any;
 
 	constructor(
-		private router: Router
+		private router: Router,
+		private afAuth: AngularFireAuth,
+		private ngZone: NgZone,
+		private common: CommonService,
 	) {}
 	// 	private sidebarService: SidebarService,
 	// 	private common: CommonService,
@@ -65,6 +70,19 @@ export class AdminComponent {
 	// 				this.darkClass = darkClass;
 	// 		});
 	// }
+
+	ngOnInit() {
+		this.common.collections$.subscribe(collections => {
+			console.log(collections);
+		});
+		this.afAuth.auth.onAuthStateChanged((user) => {
+			this.ngZone.run(() => {
+				if (user) {
+					this.common.setCurrentUser(new User(user.providerData[0]).user);
+				}
+			});
+		});
+	}
 
 	// ngOnInit() {
 	// 	this.common.user$.subscribe(user => {

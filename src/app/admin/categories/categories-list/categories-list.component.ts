@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Category, CategoryTypeEnum } from 'app/core/model/category.model';
 import { CategoryForm } from './categories-list.data';
 import { ReactiveFormComponent } from '@theflames/reactive-form';
+import { CommonService } from 'app/core/services/common.service';
 
 @Component({
   selector: 'app-categories-list',
@@ -23,6 +24,7 @@ export class CategoriesListComponent implements OnInit {
 
   constructor(
     private firebase: FirebaseService,
+    private common: CommonService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private routes: ActivatedRoute
@@ -44,6 +46,8 @@ export class CategoriesListComponent implements OnInit {
   }
 
   ngOnInit() {
+    const collections = this.common.collections$.value.map(x => ({value: x.id, text: x.name}));
+    this.configForm.generateForm(collections);
     this.listCategories();
     this.cols = [
       { field: 'type', header: 'Loại danh mục' },
@@ -60,7 +64,7 @@ export class CategoriesListComponent implements OnInit {
       this.confirmationService.confirm({
         message: 'Bạn muốn xóa danh mục này?',
         accept: () => {
-          this.firebase.deleteRecord('Category', this.currentCategory.id).then(res => {
+          this.firebase.deleteRecord('categories', this.currentCategory.id).then(res => {
             this.categories = this.categories.filter((x: any) => x.id !== this.currentCategory.id);
           }).catch(error => {
             console.log(error);
@@ -71,21 +75,27 @@ export class CategoriesListComponent implements OnInit {
   }
 
   listCategories() {
-    this.firebase.listRecords('Category').then(data => {
-      this.categories = this.firebase.convertRecord(data);
+    this.firebase.listRecords('categories').then(data => {
+      this.categories = this.firebase.convertRecord(data).sort((a, b) => {
+        const aType = `${a.type}${a.key}`;
+        const bType = `${b.type}${b.key}`;
+        return aType > bType ? 1 : -1;
+      });
+      console.log(this.categories);
+      this.common.categories$.next(this.categories);
     });
   }
 
   onSubmit(event) {
     if (this.formComp.form.valid) {
       if (event.id) {
-        this.firebase.editRecord('Category', event.id, event).then(data => {
+        this.firebase.editRecord('categories', event.id, event).then(data => {
           this.display = false;
           this.messageService.add({severity: 'success', summary: 'Sửa danh mục thành công', detail: ''});
           this.listCategories();
         });
       } else {
-        this.firebase.createRecord('Category', event).then(data => {
+        this.firebase.createRecord('categories', event).then(data => {
           this.display = false;
           this.messageService.add({severity: 'success', summary: 'Tạo danh mục thành công', detail: ''});
           this.listCategories();

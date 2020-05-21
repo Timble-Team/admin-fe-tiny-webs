@@ -14,17 +14,19 @@ export const API_BASE_URL = ``;
 export class FirebaseService {
   downloadUrls$ = new BehaviorSubject<any>([]);
   publicCond = [
-    {
-      key: 'public',
-      compared: '==',
-      value: true
-    },
+    // {
+    //   key: 'public',
+    //   compared: '==',
+    //   value: true
+    // },
     {
       key: 'deletedAt',
       compared: '==',
       value: null
     }
   ];
+
+  LIMIT_RECORDS = 20;
 
   uploadProgressStorage$ =  new Observable<any>(null);
 
@@ -35,8 +37,8 @@ export class FirebaseService {
     private firestore: AngularFirestore
   ) { }
 
-  buildReference(collection, id) {
-    return this.firestore.collection(collection).doc(id).ref;
+  buildReference(collection, id, firestore = this.firestore) {
+    return firestore.collection(collection).doc(id).ref;
   }
 
   convertRecord(res) {
@@ -59,26 +61,26 @@ export class FirebaseService {
     }
   }
 
-  createRecord(collection, data) {
-    return  this.firestore
+  createRecord(collection, data, firestore = this.firestore) {
+    return  firestore
             .collection(collection)
             .add(data);
   }
 
-  createRecordReference(collection, key, ref, data) {
+  createRecordReference(collection, key, ref, data, firestore = this.firestore) {
     const refer = data;
-    refer[key] = this.firestore.doc(ref).ref;
-    return this.firestore
+    refer[key] = firestore.doc(ref).ref;
+    return firestore
             .collection(collection)
             .add(refer);
   }
 
-  getRecord(collection, id) {
-    return this.firestore.collection(collection).doc(id).get().toPromise();
+  getRecord(collection, id, firestore = this.firestore) {
+    return firestore.collection(collection).doc(id).get().toPromise();
   }
 
-  multipleCollection(arrCollection) {
-    let tempRequest: any = this.firestore;
+  multipleCollection(arrCollection, firestore = this.firestore) {
+    let tempRequest: any = firestore;
     arrCollection.forEach(x => {
       if (x.id) {
         tempRequest = tempRequest.collection(x.collection).doc(x.id);
@@ -89,9 +91,9 @@ export class FirebaseService {
     return tempRequest;
   }
 
-  createMultipleRecords(arrCollection, dataArray) {
+  createMultipleRecords(arrCollection, dataArray, firestore = this.firestore) {
     const tempRequest: any = this.multipleCollection(arrCollection).ref;
-    const batch: any = this.firestore.firestore.batch();
+    const batch: any = firestore.firestore.batch();
 
     dataArray.forEach((doc) => {
       batch.set(tempRequest.doc(), doc);
@@ -109,19 +111,19 @@ export class FirebaseService {
     condition: {key, compared, value}
     order: {key, by}
   */
-  listRecords(collection, condition = null, order = null, limit = 7, lastIndex = null) {
+  listRecords(collection, condition = null, order = null, limit = this.LIMIT_RECORDS, lastIndex = null, firestore = this.firestore) {
     let request;
     if (condition) {
       if (condition.length) {
-        request = this.firestore.collection(collection).ref;
+        request = firestore.collection(collection).ref;
         condition.forEach(x => {
           request = request.where(x.key, x.compared, x.value);
         });
       } else {
-        request = this.firestore.collection(collection).ref.where(condition.key, condition.compared, condition.value);
+        request = firestore.collection(collection).ref.where(condition.key, condition.compared, condition.value);
       }
     } else {
-      request = this.firestore.collection(collection).ref;
+      request = firestore.collection(collection).ref;
     }
     request = order ? request.orderBy(order.key, order.by) : request;
     request = lastIndex ? request.startAfter(lastIndex) : request;
@@ -129,20 +131,20 @@ export class FirebaseService {
     return request.get();
   }
 
-  listPublicRecords(collection, extraCondition = [], order = null, limit = 7, lastIndex = null) {
+  listPaginationRecords(collection, extraCondition = [], order = null, limit = this.LIMIT_RECORDS, lastIndex = null) {
     const objCond = [...extraCondition, ...this.publicCond];
     return this.listRecords(collection, objCond, order, limit, lastIndex);
   }
 
-  editRecord(collection, id, body) {
-    return this.firestore
+  editRecord(collection, id, body, firestore = this.firestore) {
+    return firestore
       .collection(collection)
       .doc(id)
       .set(body, { merge: true });
   }
 
-  deleteRecord(collection, id) {
-    return this.firestore
+  deleteRecord(collection, id, firestore = this.firestore) {
+    return firestore
       .collection(collection)
       .doc(id)
       .delete();
