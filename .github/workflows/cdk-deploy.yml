@@ -23,7 +23,7 @@ jobs:
           npm install -g firebase-tools
 
       - name: Copy file via scp
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.0.10
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
