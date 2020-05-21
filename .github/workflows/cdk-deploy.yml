@@ -23,13 +23,13 @@ jobs:
           npm install -g firebase-tools
       
       - name: check connection server
-        uses: appleboy/scp-action@master
+        uses: garygrossgarten/github-action-scp@release
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          source: "README.md"
-          target: "~/"
+          privateKey: ${{ secrets.KEY }}
+          local: ./
+          remote: ~/
 
       - name: Setup dependencies
         run: npm install
